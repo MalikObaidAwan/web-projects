@@ -1,0 +1,82 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+.navbar {
+    margin-bottom: 20px;
+}
+.card {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.card img {
+    border-radius: 10px;
+}
+.container {
+    padding: 20px;
+}
+.nav-link {
+    color: #495057 !important;
+}
+.nav-link.active {
+    color: #007bff !important;
+}
+.navbar-brand, .navbar-toggler {
+    color: #495057 !important;
+}
+.navbar-brand:hover, .navbar-toggler:hover {
+    color: #007bff !important;
+}
+.navbar-brand i, .nav-link i, .navbar-toggler i {
+    margin-right: 5px;
+}
+.dropdown-menu a {
+    color: #495057 !important;
+}
+.dropdown-menu a:hover {
+    background-color: #f8f9fa !important;
+}
+/* General styles for the product list and details pages */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.card-img-top {
+    width: 100%;
+    height: auto;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-title {
+    font-size: 1.25em;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    margin-bottom: 10px;
+}
+
+.checked {
+    color: orange;
+}
+
+.product-image {
+    max-width: 100%;
+    height: auto;
+    width: 300px; /* Adjust width as needed */
+    display: block;
+    margin: 0 auto;
+}

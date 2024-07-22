@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Display</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        .checked {
+            color: orange;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div>
+            <i class="fa fa-user-circle" aria-hidden="true"> login</i>
+        </div>
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fa fa-bars" aria-hidden="true"></i> Menu</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fa fa-link" aria-hidden="true"></i> Link</a>
+                    </li>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><button class="dropdown-item" type="button">Action</button></li>
+                            <li><button class="dropdown-item" type="button">Another action</button></li>
+                            <li><button class="dropdown-item" type="button">Something else here</button></li>
+                        </ul>
+                    </div>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" aria-disabled="true"><i class="fa fa-toggle-on" aria-hidden="true"></i> Disabled</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#adminLoginModal"><i class="fa fa-user-circle" aria-hidden="true"></i> Admin Login</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input id="searchInput" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button id="searchButton" class="btn btn-outline-success" type="button">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Admin Login Modal -->
+    <div class="modal fade" id="adminLoginModal" tabindex="-1" aria-labelledby="adminLoginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="adminLoginModalLabel">Admin Login</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="adminLoginForm">
+                        <div class="mb-3">
+                            <label for="adminUsername" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="adminUsername" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="adminPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://belliza-demo.myshopify.com/cdn/shop/files/banner-img.jpg?v=1687328617&width=1770" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="https://belliza-demo.myshopify.com/cdn/shop/files/banner-1_9036b045-3a26-431d-b268-327254e907fd.jpg?v=1687945334&width=1770" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="https://belliza-demo.myshopify.com/cdn/shop/files/banner-3_d9088c85-7830-4b3a-85e8-17db7dc38174.jpg?v=1689838542&width=1770" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <div class="container">
+        <div class="row" id="productContainer">
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('searchInput');
+            const searchButton = document.getElementById('searchButton');
+
+            searchButton.addEventListener('click', function () {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+                const productCards = document.querySelectorAll('.card');
+
+                productCards.forEach(function (card) {
+                    const title = card.querySelector('.card-title').innerText.toLowerCase();
+                    const description = card.querySelector('.card-text').innerText.toLowerCase();
+
+                    if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        async function fetchProducts() {
+            try {
+                // Fetch products data from the API
+                const response = await fetch('https://dummyjson.com/products');
+                if (!response.ok) {
+                    throw new Error('Could not fetch the resources');
+                }
+
+                const result = await response.json();
+                const products = result.products;
+                console.log('Products:', products);
+
+                // Select the container and clear previous contents
+                const container = document.getElementById('productContainer');
+                container.innerHTML = '';
+
+                // Function to create star rating elements
+                function createStarRating(rating) {
+                    const starContainer = document.createElement('div');
+                    for (let i = 0; i < 5; i++) {
+                        const star = document.createElement('span');
+                        star.className = i < rating ? 'fa fa-star checked' : 'fa fa-star';
+                        starContainer.appendChild(star);
+                    }
+                    return starContainer;
+                }
+
+                // Iterate over each product and create the necessary elements
+                products.forEach(product => {
+                    const col = document.createElement('div');
+                    col.className = 'col-md-4';
+
+                    const card = document.createElement('div');
+                    card.className = 'card mb-4';
+
+                    const imgElement = document.createElement('img');
+                    imgElement.src = product.thumbnail;
+                    imgElement.alt = product.title;
+                    imgElement.className = 'card-img-top';
+                    imgElement.style.width = '100%';
+
+                    const cardBody = document.createElement('div');
+                    cardBody.className = 'card-body';
+
+                    const cardTitle = document.createElement('h5');
+                    cardTitle.className = 'card-title';
+                    cardTitle.innerText = product.title;
+
+                    const cardText = document.createElement('p');
+                    cardText.className = 'card-text';
+                    cardText.innerText = `$${product.price}`;
+
+                    const ratingElement = createStarRating(Math.round(product.rating));
+
+                    const category = document.createElement('p');
+                    category.className = 'card-text';
+                    category.innerText = `Category: ${product.category}`;
+
+                    const description = document.createElement('p');
+                    description.className = 'card-text';
+                    description.innerText = product.description;
+
+                    const detailsButton = document.createElement('a');
+                    detailsButton.href = 'details.html';
+                    detailsButton.className = 'btn btn-secondary me-2';
+                    detailsButton.innerText = 'Details';
+
+                    detailsButton.addEventListener('click', () => {
+                        // Store product details in local storage
+                        localStorage.setItem('selectedProduct', JSON.stringify(product));
+                    });
+
+                    const buyButton = document.createElement('a');
+                    buyButton.href = '#';
+                    buyButton.className = 'btn btn-primary me-2';
+                    buyButton.innerText = 'Buy Now';
+
+                    const cartButton = document.createElement('a');
+                    cartButton.href = '#';
+                    cartButton.className = 'btn btn-success';
+                    cartButton.innerText = 'Add to Cart';
+
+                    cartButton.addEventListener('click', async (event) => {
+                        event.preventDefault();
+                        try {
+                            const cartResponse = await fetch('https://dummyjson.com/carts/add', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({
+                                    userId: 1,
+                                    products: [
+                                        {
+                                            id: product.id,
+                                            quantity: 1,
+                                        }
+                                    ]
+                                })
+                            });
+                            const cartResult = await cartResponse.json();
+                            console.log('Cart Result:', cartResult);
+                            // Notify the user about the product added to the cart
+                            alert(`Product added to cart: ${product.title}`);
+                            // Navigate to the cart page
+                            window.location.href = 'cart.html';
+                        } catch (error) {
+                            console.error('Error adding to cart:', error);
+                        }
+                    });
+
+                    // Append elements to their respective parents
+                    cardBody.appendChild(cardTitle);
+                    cardBody.appendChild(description);
+                    cardBody.appendChild(category);
+                    cardBody.appendChild(cardText);
+                    cardBody.appendChild(ratingElement);
+                    cardBody.appendChild(detailsButton); // Add the new Details button
+                    cardBody.appendChild(buyButton); // Add the existing Buy Now button
+                    cardBody.appendChild(cartButton); // Add the new Cart button
+                    card.appendChild(imgElement);
+                    card.appendChild(cardBody);
+                    col.appendChild(card);
+                    container.appendChild(col);
+                });
+            } catch (error) {
+                console.error('Error fetching products:', error);
+            }
+        }
+
+        // Call the function to fetch and display products
+        fetchProducts();
+
+        // Admin login handling
+        document.getElementById('adminLoginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+
+            if (username === 'admin' && password === '123') {
+                window.location.href = 'admin.html';
+            } else {
+                alert('Invalid credentials');
+            }
+        });
+    </script>
+</body>
+
+</html>
